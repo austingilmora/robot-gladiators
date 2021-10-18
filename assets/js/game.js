@@ -5,11 +5,20 @@ var playerMoney = 10;
 
 console.log(playerName, playerAttack, playerHealth);
 
-var enemyName = "Roborto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function() {
+
+
+
+for(var i = 0; i < enemyNames.length; i++) {
+    console.log(enemyNames[i]);
+    console.log(i);
+    console.log(enemyNames[i] + " is at " + i + " index.");
+}
+
+var fight = function(enemyName) {
     //alert the player the game has started
     window.alert("Welcome to Robot Gladiators!");
 
@@ -35,6 +44,13 @@ var fight = function() {
         console.log(
             enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health ramaining."
         )
+        // Is the player still alive?
+        if (playerHealth <= 0) {
+            window.alert(playerName + "has died!");
+        }
+        else {
+        window.alert(playerName + " still has " + playerHealth + " health left.");
+        }
     }else if (promptFight ==="skip" || promptFight === "SKIP") {
         // Ask if they really want to skip
         var confirmSkip = window.confirm("Are you sure you'd like to quit?");
@@ -52,13 +68,11 @@ var fight = function() {
     }
     
 
-    // Is the player still alive?
-    if (playerHealth <= 0) {
-        window.alert(playerName + "has died!");
-    }
-    else {
-        window.alert(playerName + " still has " + playerHealth + " health left.");
-    }
+    
 };
 
-fight();
+
+for(var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
+// fight();
