@@ -9,7 +9,11 @@ var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
+var randomNumber = function (min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
 
+    return value;
+}
 
 
 for(var i = 0; i < enemyNames.length; i++) {
@@ -29,14 +33,16 @@ var fight = function(enemyName) {
             // If yes -> take away 10 from playerMoney
             if (confirmSkip) {
             window.alert(playerName + " has decided to skip this fight. Goodbye!");
-            playerMoney = playerMoney - 10;
+            playerMoney = Math.max(0, playerMoney - 10);
             console.log("playerMoney", playerMoney);
             break;
             }
         }
         
         //Subtract the val of playerAttack from enemyHealth and use that result to update the value of enemyHealth var
-        enemyHealth = enemyHealth - playerAttack;
+        var damage = randomNumber(playerAttack - 3, playerAttack);
+
+        enemyHealth = Math.max(0, enemyHealth - damage)
         //Log a resulting message to the console so we know it worked
         console.log(
             playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health ramaining."
@@ -54,7 +60,10 @@ var fight = function(enemyName) {
         }
 
         //Subtract the value of enemyAttack from playerHealth and use that result to update the value of playerHealth var
-        playerHealth = playerHealth - enemyAttack;
+        var damage = randomNumber(enemyAttack - 3, enemyAttack);
+
+        playerHealth = Math.max(0, playerHealth - damage);
+
         //Log a resulting message to the console so we know it worked
         console.log(
             enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health ramaining."
@@ -98,11 +107,11 @@ var shop = function(){
         case "Refill":
         case "REFILL":
             if (playerMoney >= 7) {
-                window.alert("Refilling player's health by 50 for 7 dollars.")
+                window.alert("Refilling player's health by 20 for 7 dollars.")
 
                 //give health, take money
                 playerMoney = playerMoney - 7;
-                playerHealth = playerHealth + 50;
+                playerHealth = playerHealth + 20;
                 
             }else {
                 window.alert("You don't have enough money!");
@@ -153,7 +162,7 @@ var startGame = function() {
             var pickedEnemyName = enemyNames[i];
 
             //reset enemyHealth before fight
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40, 60);
 
             //use debugger to see what's going on
             //debugger;
