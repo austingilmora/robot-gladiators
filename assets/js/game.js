@@ -1,5 +1,5 @@
 var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    var value = Math.floor(Math.random() * (max - min) + min);
 
     return value;
 };
@@ -109,7 +109,7 @@ var fight = function(enemy) {
             
             var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
-            enemy.health = Math.max(0, enemy.health - damage)
+            enemy.health = Math.max(0, enemy.health - damage);
             //Log a resulting message to the console so we know it worked
             console.log(
                 playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health ramaining."
@@ -125,7 +125,7 @@ var fight = function(enemy) {
             } else {
                  window.alert(enemy.name + " still has " + enemy.health + " health left.");
             }
-        }else {
+        } else {
             //Subtract the value of enemy.attack from playerInfo.health and use that result to update the value of playerInfo.health var
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
 
@@ -151,9 +151,9 @@ var fight = function(enemy) {
 var endGame = function() {
     window.alert("The game has now ended. Let's see how you did!");
 
-    var highscore = localStorage.getItem("highscore");
-    if (highscore === null) {
-        highscore = 0;
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+        highScore = 0;
     }
 
     if (playerInfo.money > highScore) {
@@ -163,7 +163,7 @@ var endGame = function() {
         window.alert (playerInfo.name + " now has the high score of " + playerInfo.money + "!");
     }
     else {
-        window.alert(playerInfo.name + "did not beat the high score of " + highscore + ". Maybe next time!");
+        window.alert(playerInfo.name + "did not beat the high score of " + highScore + ". Maybe next time!");
     }
 
     
